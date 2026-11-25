@@ -908,12 +908,14 @@ function onSnap(qs){
   SY.ready=1;hideGate();lsave();track();stat(navigator.onLine?'Synced':'Offline');if(ch)refresh();return}
  let ch=0;qs.docChanges().forEach(c=>{if(c.type!=='removed'&&applyRemote(c.doc.id,c.doc.data(),0))ch=1});if(ch){lsave();persistMeta();refresh();stat('Synced')}}
 /* ---------- Firebase sync (Netlify build): Google sign-in required, data lives in the account ---------- */
-const FIREBASE_CONFIG={apiKey:'AIzaSyCmySA0xKOsf1GmL8gBPUpqHkwJwbetBcc',authDomain:'plannight.firebaseapp.com',projectId:'plannight',storageBucket:'plannight.firebasestorage.app',messagingSenderId:'227767015185',appId:'1:227767015185:web:82b22de014e24961ca1eb0'};
+const FIREBASE_CONFIG={apiKey:'AIzaSyBlfuTW2YY5o_L3XxVYLOp17vqTV7NfcTA',authDomain:'plan-a4d97.firebaseapp.com',projectId:'plan-a4d97',storageBucket:'plan-a4d97.firebasestorage.app',messagingSenderId:'626565348289',appId:'1:626565348289:web:917da7f7b4a195ac434d40'};
 const FB={user:null,unsub:null},FB_READY=()=>window.firebase&&!!FIREBASE_CONFIG.apiKey;
 const syncHtml=()=>esc(SY.label)+(FB.user?' · <button class="lk" id="so">Sign out</button>':'');
 function stat(t){SY.label=t;const e=$('#sync');if(e)e.innerHTML=syncHtml()}
 function showGate(msg,btn){const g=$('#gate');g.hidden=false;g.innerHTML=`<div class="gbox"><div style="font-size:22px;font-weight:600">Planner</div><p class="mt">${msg}</p>${btn?`<button class="btn pri" id="${btn}">${btn==='gsign'?'Sign in with Google':'Retry'}</button>`:''}</div>`}
-const signIn=()=>firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(()=>showGate('Sign in failed. Try again.','gsign'));
+const AUTHHINT={'auth/unauthorized-domain':()=>`Add "${location.hostname}" in Firebase > Authentication > Settings > Authorized domains.`,'auth/operation-not-allowed':()=>'Turn on Google in Firebase > Authentication > Sign-in method.','auth/configuration-not-found':()=>'In Firebase > Authentication, click Get started first.','auth/popup-closed-by-user':()=>'The sign-in window was closed. Try again.','auth/cancelled-popup-request':()=>'Try again.','auth/network-request-failed':()=>'Check your internet connection.','auth/invalid-api-key':()=>'The Firebase config in this file looks wrong.','permission-denied':()=>'Publish the Firestore Rules from the setup steps.','failed-precondition':()=>'Create the Firestore database (Build > Firestore Database).','not-found':()=>'Create the Firestore database (Build > Firestore Database).','unavailable':()=>'Check your internet connection.'};
+const errMsg=(e,pre)=>{const c=(e&&e.code)||'unknown';return pre+' '+(AUTHHINT[c]?AUTHHINT[c]():'')+' <span style="font-size:12px">('+esc(c)+')</span>'};
+function signIn(){const pr=new firebase.auth.GoogleAuthProvider();firebase.auth().signInWithPopup(pr).catch(e=>{const c=e&&e.code;if(c==='auth/popup-blocked'||c==='auth/operation-not-supported-in-this-environment')return firebase.auth().signInWithRedirect(pr);showGate(errMsg(e,'Sign in failed.'),'gsign')})}
 async function signOutWipe(){if(Object.keys(SY.dirty).length){track();await push();if(Object.keys(SY.dirty).length){toast('Still syncing. Try again in a moment.');return}}
  try{const d=await idb();d.close()}catch(e){}
  try{['planner-v1','planner-sync','planner-uid','planner-rt'].forEach(k=>localStorage.removeItem(k));indexedDB.deleteDatabase('planner-img')}catch(e){}
@@ -928,7 +930,7 @@ function startSync(){
   const last=localStorage.getItem('planner-uid');if(last&&last!==u.uid){SY.ts={};SY.sig={};SY.dirty={};persistMeta()}localStorage.setItem('planner-uid',u.uid);
   SY.col=db.collection('users/'+u.uid+'/planner');stat(navigator.onLine?'Connecting…':'Offline');
   if(navigator.onLine)showGate('Loading your data…');else hideGate();
-  FB.unsub=SY.col.onSnapshot(onSnap,()=>{stat('Sync error');showGate('Could not reach your account. Check your connection.','gretry')})})}
+  FB.unsub=SY.col.onSnapshot(onSnap,e=>{stat('Sync error');showGate(errMsg(e,'Could not reach your account.'),'gretry')})})}
 document.addEventListener('click',ev=>{const id=ev.target.id;if(id==='gsign')signIn();else if(id==='gretry')location.reload();else if(id==='so')signOutWipe()});
 addEventListener('online',()=>{if(SY.col){stat('Syncing…');push();setTimeout(()=>{if(!Object.keys(SY.dirty).length)stat('Synced')},1500)}});
 addEventListener('offline',()=>{if(SY.col)stat('Offline')});
