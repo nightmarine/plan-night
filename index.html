@@ -320,6 +320,7 @@ nav button{min-height:52px}
 #chpop{padding:0 18px calc(40px + env(safe-area-inset-bottom,0px));overflow-x:hidden}.chin{max-width:520px;margin:0 auto}
 .cbar{display:flex;align-items:center;gap:6px;padding:calc(10px + env(safe-area-inset-top,0px)) 0 6px}.cttl{flex:1;text-align:center;min-width:0}.cttl b{display:block;font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cttl small{color:var(--mt);font-size:13px}
 .cbig{margin:14px 0 8px;display:flex;align-items:baseline;gap:8px}.cbig b{font-size:44px;font-weight:600;line-height:1}.cbig span{color:var(--mt)}
+.cin{width:72px;border:0;background:none;padding:0;border-radius:0;font-size:44px;font-weight:600;line-height:1;color:var(--mt);-moz-appearance:textfield}.cin::-webkit-outer-spin-button,.cin::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.cin:focus-visible{outline:0;border-bottom:2px solid var(--ac)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:8px;margin:20px 0 26px}
 .gd{aspect-ratio:1;border:1px solid var(--ln);border-radius:12px;background:#fff;font-size:14px;padding:0;position:relative;color:var(--ink)}
 .gd.part{background:#ececec;border-color:#ececec}.gd.ok{background:#111;border-color:#111;color:#fff}.gd.now::after{content:"";position:absolute;bottom:5px;left:50%;width:5px;height:5px;margin-left:-2.500px;border-radius:50%;background:currentColor}.gd.on{box-shadow:0 0 0 2px #fff,0 0 0 4px #111}
@@ -330,6 +331,11 @@ nav button{min-height:52px}
 .tk .rd:checked{background:#111 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.500 4.500L19 7.500'/%3E%3C/svg%3E") center/70% no-repeat}
 .tk .tx{flex:1;min-width:0;border:0;background:transparent;border-radius:0;padding:10px 0;font-size:17px}.tk.dn .tx{color:var(--mt);text-decoration:line-through}
 .tk .pl{width:26px;text-align:center;color:var(--mt);font-size:22px;flex:none}.tk .add2::placeholder{color:#aaa}.tk .ib{opacity:.4}
+.sc{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--ln)}.sc-t{flex:1;min-width:0;border:0;background:none;text-align:left;padding:0;display:flex;flex-direction:column}.sc-t b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sc-t small{color:var(--mt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sc-cr{color:var(--mt);font-size:13px;white-space:nowrap}.sc-g{width:78px;flex:none}
+.ex2{display:flex;gap:14px;align-items:center;width:100%;border:0;background:none;text-align:left;padding:12px 2px;border-bottom:1px solid var(--ln)}.exd{width:92px;flex:none}.exd b{display:block;font-size:17px}.exd small{color:var(--mt);font-size:12px}.exi{flex:1;min-width:0;display:flex;flex-direction:column}.past{opacity:.5}
+.lkr{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--ln)}.lkr a{flex:1;min-width:0;color:var(--ink);text-decoration:none;display:flex;flex-direction:column}.lkr small{word-break:break-all}
+.stf{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.stf input{flex:1 1 140px;min-width:0}
+.pr{display:flex;gap:10px;align-items:center;width:100%;border:0;border-bottom:1px solid var(--ln);background:none;text-align:left;padding:10px 2px}.pr:hover{background:var(--acs)}.pk{width:22px;height:22px;border:2px solid var(--ln);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}.pk.ok{background:#111;border-color:#111;color:#fff}.pn{flex:1;min-width:0;display:flex;flex-direction:column}.pr b{width:34px;text-align:right}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -349,7 +355,7 @@ const MO=['January','February','March','April','May','June','July','August','Sep
 const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const thd=ds=>{const[y,m,d]=ds.split('-').map(Number);return MS[m-1]+' '+d+', '+y};
 const IC={board:'<rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="4" height="13" rx="1"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',focus:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',diary:'<path d="M5 3h12a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2zM9 8h6M9 12h6"/>',notes:'<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/>',theme:'<circle cx="12" cy="12" r="8"/><path d="M12 4v16"/>'};
-const TABS=[['board','Board'],['cal','Calendar'],['focus','Focus'],['notes','Notes'],['books','Books'],['draw','Draw'],['money','Money'],['chal','Challenge']];
+const TABS=[['board','Board'],['cal','Calendar'],['focus','Focus'],['study','Study'],['notes','Notes'],['books','Books'],['draw','Draw'],['money','Money'],['chal','Challenge']];
 const day=n=>{const d=new Date();d.setDate(d.getDate()+n);return fmt(d)};
 
 let S=null;
@@ -361,7 +367,7 @@ const save=()=>{lsave();scheduleTrack()};
 let view='board',focusId=null;
 
 function nav(){$('#nav').innerHTML=TABS.map(([k,n])=>`<button class="${view===k?'on':''}" data-act="go" data-id="${k}"><svg viewBox="0 0 24 24">${IC[k]}</svg>${n}</button>`).join('')+'<span class="sp"></span><div id="sync" class="sy">'+syncHtml()+'</div>'}
-function go(v){view=v;nav();({board,cal:calendar,focus,notes,books,draw,money:finView,chal:challenges})[v]()}
+function go(v){view=v;nav();({board,cal:calendar,focus,notes,books,draw,money:finView,chal:challenges,study})[v]()}
 
 /* ---------- board ---------- */
 let armC=null,dg=null;
@@ -391,8 +397,8 @@ let cal={v:'m',ref:TODAY()};
 function colr(k){return CL[k]||(/^#/.test(k)?k:CL.ac)}
 function fg(k){let h=colr(k).slice(1);if(h.length===3)h=h.replace(/./g,'$&$&');const n=parseInt(h,16);return (.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))>150?'#1d2433':'#fff'}
 const occurs=(e,ds)=>{if(e.d===ds)return true;if(!e.r||ds<e.d||(e.u&&ds>e.u))return false;const a=pd(ds),b=pd(e.d);return e.r==='daily'||(e.r==='weekly'&&a.getDay()===b.getDay())||(e.r==='weekdays'&&a.getDay()>0&&a.getDay()<6)||(e.r==='monthly'&&a.getDate()===b.getDate())};
-const items=ds=>[...S.events.filter(e=>occurs(e,ds)).map(e=>({id:e.id,t:e.t,s:e.s,e:e.e,c:e.c,ev:1,r:e.r})),...S.cards.filter(c=>c.d===ds).map(c=>({id:c.id,t:c.t,s:'',e:'',c:c.c||'ac',done:c.done,tk:1}))].sort((a,b)=>(a.s||'').localeCompare(b.s||''));
-const chipE=x=>`<div class="ec ${x.done?'dn':''}" draggable="${x.r?'false':'true'}" data-act="${x.ev?'editev':'edit'}" data-id="${x.id}" style="background:${colr(x.c)};color:${fg(x.c)}">${x.tk?(x.done?'☑ ':'☐ '):''}${x.s?x.s+' ':''}${esc(x.t)}</div>`;
+const items=ds=>[...S.events.filter(e=>occurs(e,ds)).map(e=>({id:e.id,t:e.t,s:e.s,e:e.e,c:e.c,ev:1,r:e.r})),...S.cards.filter(c=>c.d===ds).map(c=>({id:c.id,t:c.t,s:'',e:'',c:c.c||'ac',done:c.done,tk:1})),...(S.st?S.st.exams.filter(e=>e.d===ds).map(e=>({id:e.id,t:'Exam · '+cname(e),s:'',e:'',c:'#111111',ex:1})):[])].sort((a,b)=>(a.s||'').localeCompare(b.s||''));
+const chipE=x=>`<div class="ec ${x.done?'dn':''}" draggable="${x.r?'false':'true'}" data-act="${x.ex?'stxedit':x.ev?'editev':'edit'}" data-id="${x.id}" style="background:${colr(x.c)};color:${fg(x.c)}">${x.tk?(x.done?'☑ ':'☐ '):''}${x.s?x.s+' ':''}${esc(x.t)}</div>`;
 const evBox=x=>{const a=tm(x.s),b=x.e?Math.max(tm(x.e),a+30):a+60;return `<div class="eb" data-act="editev" data-id="${x.id}" style="top:${a/60*H}px;height:${(b-a)/60*H-2}px;background:${colr(x.c)};color:${fg(x.c)}"><b>${esc(x.t)}</b><br>${x.s}${x.e?'–'+x.e:''}<span class="rz"></span></div>`};
 function calendar(){
  const r=pd(cal.ref),td=TODAY();let title,body;
@@ -787,7 +793,7 @@ document.addEventListener('change',ev=>{const t=ev.target,f=t.dataset&&t.dataset
 
 /* ---------- phone helpers ---------- */
 function MOB(){return innerWidth<=760}
-function agendaHtml(){const ds=cal.sel||(cal.sel=TODAY()),l=items(ds);return `<div class="ag"><div class="row"><b class="sp">${thd(ds)}</b><button class="btn pri" data-act="newev" data-id="${ds}">+ Add</button></div>${l.map(x=>`<button class="agi" data-act="${x.ev?'editev':'edit'}" data-id="${x.id}"><i style="background:${colr(x.c)}"></i><span>${x.s?x.s+(x.e?'–'+x.e:'')+' ':''}${esc(x.t)}</span>${x.tk?`<small class="mt">${x.done?'Done':'Task'}</small>`:''}</button>`).join('')}</div>`}
+function agendaHtml(){const ds=cal.sel||(cal.sel=TODAY()),l=items(ds);return `<div class="ag"><div class="row"><b class="sp">${thd(ds)}</b><button class="btn pri" data-act="newev" data-id="${ds}">+ Add</button></div>${l.map(x=>`<button class="agi" data-act="${x.ex?'stxedit':x.ev?'editev':'edit'}" data-id="${x.id}"><i style="background:${colr(x.c)}"></i><span>${x.s?x.s+(x.e?'–'+x.e:'')+' ':''}${esc(x.t)}</span>${x.tk?`<small class="mt">${x.done?'Done':'Task'}</small>`:''}</button>`).join('')}</div>`}
 Object.assign(A,{csel:e=>{cal.sel=e.dataset.id;calendar()},nback:()=>{nm='l';notes()}});
 matchMedia('(max-width:760px)').addEventListener('change',()=>go(view));
 
@@ -868,12 +874,60 @@ document.addEventListener('change',ev=>{const t=ev.target;if(!t.dataset)return;
  else if(t.dataset.chx&&!t.value.trim()){const c=chOf(chs.id),n=t.dataset.d;c.items[n]=(c.items[n]||[]).filter(x=>x.id!==t.dataset.chx);save();chPop(1)}});
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&chs.id&&!dlg.open)A.chclose()});
 
+/* ---------- study: terms, courses, credits, grades, exams, links ---------- */
+IC.study='<path d="M3 9l9-5 9 5-9 5zM7 11.500V16c0 1.500 2.200 3 5 3s5-1.500 5-3v-4.500"/>';
+const GR=[['A',4],['B+',3.5],['B',3],['C+',2.5],['C',2],['D+',1.5],['D',1],['F',0]],GP=Object.fromEntries(GR),GOPT=['',...GR.map(g=>g[0]),'W','S','U'];
+let sv={tab:'c'};
+const passedC=c=>c.grade&&!['F','W','U'].includes(c.grade);
+const earned=c=>c.grade&&!['F','W','U'].includes(c.grade)?num(c.cr):0;
+function gpa(l){let p=0,cr=0;l.forEach(c=>{if(GP[c.grade]!=null){p+=GP[c.grade]*num(c.cr);cr+=num(c.cr)}});return cr?p/cr:null}
+const f2=v=>v==null?'–':v.toFixed(2);
+const cname=e=>{const c=S.st.courses.find(x=>x.id===e.course);return c?c.name:(e.cn||'Exam')};
+const stTerm=()=>S.st.terms.find(t=>t.id===S.st.cur)||S.st.terms[0];
+function study(){main.innerHTML=`<div class="row" style="margin-bottom:14px"><div class="seg" style="margin:0">${[['c','Courses'],['p','Progress'],['e','Exams'],['l','Links']].map(([k,v])=>`<button class="${sv.tab===k?'on':''}" data-act="sttab" data-id="${k}">${v}</button>`).join('')}</div></div>`+(sv.tab==='c'?stCourses():sv.tab==='p'?stProgress():sv.tab==='e'?stExams():stLinks())}
+function stCourses(){const st=S.st,term=stTerm();st.cur=term.id;const cs=st.courses.filter(c=>c.term===term.id),ear=st.courses.reduce((a,c)=>a+earned(c),0),g=st.goal||0,tcr=cs.reduce((a,c)=>a+num(c.cr),0);
+ return `<div class="sm"><span>GPAX <b>${f2(gpa(st.courses))}</b></span><span>Credits <b>${ear}</b>${g?' / '+g:''}</span><span>Courses <b>${st.courses.filter(passedC).length}${st.goalc?' / '+st.goalc:''}</b></span>${g?`<span>${Math.max(0,g-ear)} to go</span>`:''}</div>${g?`<div class="prog" style="margin:8px 0 14px"><i style="width:${Math.min(100,ear/g*100)}%"></i></div>`:'<div style="height:12px"></div>'}
+<div class="row" style="margin-bottom:10px"><select id="stterm" aria-label="Term" style="width:auto;max-width:100%">${st.terms.map(t=>`<option value="${t.id}" ${t.id===term.id?'selected':''}>${esc(t.n)} · GPA ${f2(gpa(st.courses.filter(c=>c.term===t.id)))}</option>`).join('')}</select><button class="ib" data-act="sttedit" data-id="${term.id}" aria-label="Edit term">✎</button><button class="btn" data-act="sttnew">+ Term</button><span class="sp"></span><span class="mt">${tcr} credits</span><button class="btn pri" data-act="stcedit">+ Course</button></div>
+<div>${cs.map(c=>`<div class="sc"><button class="sc-t" data-act="stcedit" data-id="${c.id}"><b>${esc(c.name)||'Untitled'}</b><small>${esc([c.code,c.teacher,c.sch].filter(Boolean).join(' · '))}</small></button><span class="sc-cr">${esc(c.cr)} cr</span><select class="sc-g" data-stg="${c.id}" aria-label="Grade">${GOPT.map(x=>`<option value="${x}" ${c.grade===x?'selected':''}>${x||'–'}</option>`).join('')}</select></div>`).join('')}</div>
+<div class="row" style="margin-top:18px"><span class="mt">Credits to graduate</span><input id="stgoal" type="number" min="0" value="${g||''}" style="width:90px" aria-label="Credits to graduate"></div>`}
+function stProgress(){const st=S.st,ps=st.courses.filter(passedC),gc=st.goalc||0;
+ return `<div class="cbig"><b>${ps.length}</b><span>/</span><input id="stgoalc" class="cin" type="number" min="0" value="${gc||''}" placeholder="–" aria-label="Courses required"></div>${gc?`<div class="prog" style="margin-top:8px;max-width:320px"><i style="width:${Math.min(100,ps.length/gc*100)}%"></i></div>`:''}`}
+function stExams(){const td=TODAY(),l=[...S.st.exams].sort((a,b)=>(a.d+(a.tm||'')).localeCompare(b.d+(b.tm||''))),up=l.filter(e=>e.d>=td),past=l.filter(e=>e.d<td).reverse();
+ const row=e=>`<button class="ex2" data-act="stxedit" data-id="${e.id}"><span class="exd"><b>${rel(e.d)}</b><small>${thd(e.d)}</small></span><span class="exi"><b>${esc(cname(e))} · ${esc(e.type)}</b><small class="mt">${[e.tm,e.room&&'Room '+e.room,e.seat&&'Seat '+e.seat].filter(Boolean).map(esc).join(' · ')}</small></span></button>`;
+ return `<div class="row" style="margin-bottom:12px"><span class="sp"></span><button class="btn pri" data-act="stxedit">+ Exam</button></div>${up.map(row).join('')}${past.length?`<h2 style="margin:22px 0 6px;color:var(--mt)">Past</h2><div class="past">${past.map(row).join('')}</div>`:''}`}
+function stLinks(){return `<form class="stf"><input id="stlt" placeholder="Title" aria-label="Title"><input id="stlu" placeholder="https://" inputmode="url" aria-label="Link"><button class="btn pri" type="submit">Add</button></form>`+S.st.links.map(l=>`<div class="lkr"><a href="${esc(l.u)}" target="_blank" rel="noopener noreferrer"><b>${esc(l.t||host(l.u))}</b><small class="mt">${esc(host(l.u))}</small></a><button class="ib" data-act="stldel" data-id="${l.id}" aria-label="Delete link">×</button></div>`).join('')}
+function openCourse(id){const c=id?S.st.courses.find(x=>x.id===id):{name:'',code:'',cr:'3',teacher:'',sch:'',lk:'',grade:''};
+ dlg.innerHTML=`<input id="scn" value="${esc(c.name)}" placeholder="Course name" aria-label="Course name"><div class="row" style="margin-top:0"><label style="flex:1">Code<input id="scc" value="${esc(c.code)}"></label><label style="flex:.6">Credits<input id="scr" type="number" min="0" step="0.5" value="${esc(c.cr)}"></label></div><label>Teacher<input id="sct" value="${esc(c.teacher)}"></label><label>Schedule / room<input id="scs" value="${esc(c.sch)}"></label><label>Link${c.lk?` <a class="rl" href="${esc(c.lk)}" target="_blank" rel="noopener noreferrer">Open ↗</a>`:''}<input id="scl" value="${esc(c.lk)}" placeholder="https://"></label><label>Grade<select id="scg">${GOPT.map(g=>`<option value="${g}" ${c.grade===g?'selected':''}>${g||'–'}</option>`).join('')}</select></label><div class="row">${id?`<button class="btn danger" data-act="stcdel" data-id="${id}">Delete</button>`:''}<span class="sp"></span><button class="btn" data-act="cclose">Cancel</button><button class="btn pri" data-act="stcsave" data-id="${id||''}">Save</button></div>`;dlg.showModal();$('#scn').focus()}
+function openExam(id){const e=id?S.st.exams.find(x=>x.id===id):{course:'',cn:'',type:'Midterm',d:TODAY(),tm:'',room:'',seat:'',n:''},cs=S.st.courses.filter(c=>c.term===S.st.cur||c.id===e.course);
+ dlg.innerHTML=`<label style="margin-top:0">Course<select id="sxc"><option value="">Other</option>${cs.map(c=>`<option value="${c.id}" ${e.course===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select></label><input id="sxn" value="${esc(e.cn)}" placeholder="Name (if other)" style="margin-top:8px" aria-label="Name"><div class="row" style="margin-top:0"><label style="flex:1">Type<select id="sxt">${['Midterm','Final','Quiz','Other'].map(t=>`<option ${e.type===t?'selected':''}>${t}</option>`).join('')}</select></label><label style="flex:1">Date<input id="sxd" type="date" value="${e.d}"></label></div><div class="row" style="margin-top:0"><label style="flex:1">Time<input id="sxm" type="time" value="${esc(e.tm)}"></label><label style="flex:1">Room<input id="sxr" value="${esc(e.room)}"></label><label style="flex:.7">Seat<input id="sxs" value="${esc(e.seat)}"></label></div><label>Notes<textarea id="sxo" rows="3">${esc(e.n)}</textarea></label><div class="row">${id?`<button class="btn danger" data-act="stxdel" data-id="${id}">Delete</button>`:''}<span class="sp"></span><button class="btn" data-act="cclose">Cancel</button><button class="btn pri" data-act="stxsave" data-id="${id||''}">Save</button></div>`;dlg.showModal()}
+function openTerm(id){const t=id?S.st.terms.find(x=>x.id===id):null;dlg.innerHTML=`<input id="stn" value="${esc(t?t.n:'Term '+(S.st.terms.length+1))}" placeholder="Term name" aria-label="Term name"><div class="row">${t&&S.st.terms.length>1?`<button class="btn danger" data-act="sttdel" data-id="${t.id}">Delete term</button>`:''}<span class="sp"></span><button class="btn" data-act="cclose">Cancel</button><button class="btn pri" data-act="sttsave" data-id="${id||''}">Save</button></div>`;dlg.showModal();$('#stn').focus()}
+const stDone=()=>{dlg.close();go(view)};
+Object.assign(A,{
+ sttab:e=>{sv.tab=e.dataset.id;study()},
+ sttnew:()=>openTerm(),sttedit:e=>openTerm(e.dataset.id),
+ sttsave:e=>{const n=$('#stn').value.trim();if(!n)return $('#stn').focus();let t=S.st.terms.find(x=>x.id===e.dataset.id);if(t)t.n=n;else{t={id:uid(),n};S.st.terms.push(t);S.st.cur=t.id}save();stDone()},
+ sttdel:e=>{const id=e.dataset.id,ids=new Set(S.st.courses.filter(c=>c.term===id).map(c=>c.id));S.st.exams.forEach(x=>{if(ids.has(x.course)){x.cn=cname(x);x.course=''}});S.st.courses=S.st.courses.filter(c=>c.term!==id);S.st.terms=S.st.terms.filter(t=>t.id!==id);S.st.cur=S.st.terms[0].id;save();stDone()},
+ stcedit:e=>openCourse(e.dataset.id),
+ stcsave:e=>{const n=$('#scn').value.trim();if(!n)return $('#scn').focus();const o={name:n,code:$('#scc').value.trim(),cr:$('#scr').value,teacher:$('#sct').value.trim(),sch:$('#scs').value.trim(),lk:cleanUrl($('#scl').value),grade:$('#scg').value};let c=S.st.courses.find(x=>x.id===e.dataset.id);if(c)Object.assign(c,o);else S.st.courses.push({id:uid(),term:S.st.cur,...o});save();stDone()},
+ stcdel:e=>{const id=e.dataset.id;S.st.exams.forEach(x=>{if(x.course===id){x.cn=cname(x);x.course=''}});S.st.courses=S.st.courses.filter(c=>c.id!==id);save();stDone()},
+ stxedit:e=>openExam(e.dataset.id),
+ stxsave:e=>{const o={course:$('#sxc').value,cn:$('#sxn').value.trim(),type:$('#sxt').value,d:$('#sxd').value||TODAY(),tm:$('#sxm').value,room:$('#sxr').value.trim(),seat:$('#sxs').value.trim(),n:$('#sxo').value.trim()};let x=S.st.exams.find(v=>v.id===e.dataset.id);if(x)Object.assign(x,o);else S.st.exams.push({id:uid(),...o});save();stDone()},
+ stxdel:e=>{S.st.exams=S.st.exams.filter(x=>x.id!==e.dataset.id);save();stDone()},
+ stldel:e=>{S.st.links=S.st.links.filter(l=>l.id!==e.dataset.id);save();study()}
+});
+document.addEventListener('submit',ev=>{const f=ev.target;if(!f.classList||!f.classList.contains('stf'))return;ev.preventDefault();const u=cleanUrl($('#stlu').value);if(!u)return $('#stlu').focus();S.st.links.push({id:uid(),t:$('#stlt').value.trim(),u});save();study()});
+document.addEventListener('change',ev=>{const t=ev.target;if(!t.dataset&&!t.id)return;
+ if(t.dataset&&t.dataset.stg){const c=S.st.courses.find(x=>x.id===t.dataset.stg);if(c){c.grade=t.value;save();study()}}
+ else if(t.id==='stterm'){S.st.cur=t.value;save();study()}
+ else if(t.id==='stgoal'){S.st.goal=Math.max(0,+t.value||0);save();study()}
+ else if(t.id==='stgoalc'){S.st.goalc=Math.max(0,+t.value||0);save();study()}});
+
 /* ---------- sync (online only, per-user private storage) ---------- */
 const SY={col:null,ready:0,ts:{},sig:{},dirty:{},busy:0,label:'Not synced',tt:null,err:0};
 try{const o=JSON.parse(localStorage.getItem('planner-sync')||'{}');SY.ts=o.ts||{};SY.sig=o.sig||{};SY.dirty=o.dirty||{}}catch(e){}
 const h=s=>{let x=5381;for(let i=0;i<s.length;i++)x=((x<<5)+x^s.charCodeAt(i))>>>0;return x};
 const persistMeta=()=>{try{localStorage.setItem('planner-sync',JSON.stringify({ts:SY.ts,sig:SY.sig,dirty:SY.dirty}))}catch(e){}};
-const localDocs=()=>{const d={core:JSON.stringify({cols:S.cols,cards:S.cards,events:S.events,pomo:S.pomo,pm:S.pm,pt:S.pt,bg:S.bgoal||0,dg:S.dwg||0,sv:S.shv,dc:S.dcur||'',df:S.dfee||0,cb:S.cb,fx:S.fx,cl:S.cl})};S.pages.forEach(p=>{d['p_'+p.id]=JSON.stringify(p)});S.bk.forEach(b=>{d['b_'+b.id]=JSON.stringify(b)});Object.keys(S.dw).forEach(k=>{d['d_'+k]=JSON.stringify(S.dw[k])});S.ch.forEach(c=>{d['h_'+c.id]=JSON.stringify(c)});d.fin=JSON.stringify(S.fin);return d};
+const localDocs=()=>{const d={core:JSON.stringify({cols:S.cols,cards:S.cards,events:S.events,pomo:S.pomo,pm:S.pm,pt:S.pt,bg:S.bgoal||0,dg:S.dwg||0,sv:S.shv,dc:S.dcur||'',df:S.dfee||0,cb:S.cb,fx:S.fx,cl:S.cl})};S.pages.forEach(p=>{d['p_'+p.id]=JSON.stringify(p)});S.bk.forEach(b=>{d['b_'+b.id]=JSON.stringify(b)});Object.keys(S.dw).forEach(k=>{d['d_'+k]=JSON.stringify(S.dw[k])});S.ch.forEach(c=>{d['h_'+c.id]=JSON.stringify(c)});d.fin=JSON.stringify(S.fin);d.st=JSON.stringify(S.st);return d};
 const hideGate=()=>{const g=$('#gate');if(g)g.hidden=true};
 function scheduleTrack(){clearTimeout(SY.tt);SY.tt=setTimeout(track,1000)}
 function track(){const d=localDocs(),now=Date.now();
@@ -896,8 +950,9 @@ function applyRemote(k,r,first){const known=SY.sig[k]!==undefined;if(known&&(r.t
  else if(k.startsWith('d_')){const id=k.slice(2);if(r.del){delete S.dw[id];IMGS.delete(id);idbSet(id,null);SY.sig[k]='x';SY.ts[k]=r.ts;return true}const o=JSON.parse(r.j),im=o.img;delete o.img;S.dw[id]=o;if(im){IMGS.set(id,im);idbSet(id,im)}else{IMGS.delete(id);idbSet(id,null)}}
  else if(k==='fin'){const r2=JSON.parse(r.j);if(!known&&first){const m=new Map(r2.map(x=>[x.id,x]));S.fin.forEach(x=>{if(!m.has(x.id))m.set(x.id,x)});S.fin=[...m.values()]}else S.fin=r2}
  else if(k.startsWith('h_')){const id=k.slice(2),i=S.ch.findIndex(x=>x.id===id);if(r.del){if(i>=0)S.ch.splice(i,1);SY.sig[k]='x';SY.ts[k]=r.ts;return true}const o=JSON.parse(r.j);i>=0?S.ch[i]=o:S.ch.push(o)}
+ else if(k==='st'){const r2=JSON.parse(r.j);['terms','courses','exams','links'].forEach(q=>{r2[q]=r2[q]||[]});if(!known&&first){const u=(a,b)=>{const m=new Map(a.map(x=>[x.id,x]));b.forEach(x=>{if(!m.has(x.id))m.set(x.id,x)});return[...m.values()]},pr=S.st.terms.length===1&&!S.st.courses.length&&!S.st.exams.length&&!S.st.links.length;S.st={goal:r2.goal||S.st.goal||0,goalc:r2.goalc||S.st.goalc||0,cur:r2.cur||S.st.cur,terms:pr?r2.terms:u(r2.terms,S.st.terms),courses:u(r2.courses,S.st.courses),exams:u(r2.exams,S.st.exams),links:u(r2.links,S.st.links)}}else S.st=r2;if(!S.st.terms.length){const t={id:uid(),n:'Term 1'};S.st.terms.push(t)}if(!S.st.terms.find(t=>t.id===S.st.cur))S.st.cur=S.st.terms[0].id}
  else return false;
- SY.ts[k]=r.ts;SY.sig[k]=(!known&&first&&(k==='core'||k==='fin'))?h(r.j):h(localDocs()[k]||'');return true}
+ SY.ts[k]=r.ts;SY.sig[k]=(!known&&first&&(k==='core'||k==='fin'||k==='st'))?h(r.j):h(localDocs()[k]||'');return true}
 function refresh(){const ae=document.activeElement;if(dlg.open||(ae&&main.contains(ae)&&(ae.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName))))return;go(view)}
 function onSnap(qs){
  if(!SY.ready){if(qs.metadata&&qs.metadata.fromCache)return;
@@ -964,7 +1019,7 @@ Object.assign(A,{
  cemo:e=>{const b=blkOf(e,pageOf(e));b.e=EMO[(EMO.indexOf(b.e||'💡')+1)%EMO.length];e.textContent=b.e;save()}
 });
 if(!S.events){S.events=[];Object.entries(S.ev||{}).forEach(([d,a])=>a.forEach(e=>S.events.push({id:e.id,t:e.t,d,s:'',e:'',c:'ac'})))}
-S.pm=S.pm||{};S.pomo=S.pomo||{};S.pt=S.pt||{};S.bk=S.bk||[];S.dw=S.dw||{};S.shv=S.shv||[];S.fin=S.fin||[];S.ch=S.ch||[];S.fx=S.fx||{};S.cl=S.cl||[];if(!S.cb)S.cb={'฿':'THB','$':'USD','€':'EUR','£':'GBP','¥':'JPY'}[S.dcur]||'THB';Object.values(S.dw).forEach(e=>{if(!e.cu)e.cu=S.cb});S.fin.forEach(x=>{if(!x.cu)x.cu=S.cb});
+S.pm=S.pm||{};S.pomo=S.pomo||{};S.pt=S.pt||{};S.bk=S.bk||[];S.dw=S.dw||{};S.shv=S.shv||[];S.fin=S.fin||[];S.ch=S.ch||[];S.st=S.st||{};['terms','courses','exams','links'].forEach(k=>{S.st[k]=S.st[k]||[]});S.st.goal=S.st.goal||0;if(!S.st.terms.length){const t={id:uid(),n:'Term 1'};S.st.terms.push(t);S.st.cur=t.id}if(!S.st.terms.find(t=>t.id===S.st.cur))S.st.cur=S.st.terms[0].id;S.fx=S.fx||{};S.cl=S.cl||[];if(!S.cb)S.cb={'฿':'THB','$':'USD','€':'EUR','£':'GBP','¥':'JPY'}[S.dcur]||'THB';Object.values(S.dw).forEach(e=>{if(!e.cu)e.cu=S.cb});S.fin.forEach(x=>{if(!x.cu)x.cu=S.cb});
 if(!S.pages){S.pages=[];
  if(S.books)S.books.forEach(bk=>{const top={...mkPage(null,bk.t),ic:bk.kind==='diary'?'📓':'📘'};S.pages.push(top);bk.pages.forEach(p=>S.pages.push({id:p.id,t:p.t||(p.d?thd(p.d):''),ic:'📄',par:top.id,open:1,b:p.b}))});
  else(S.notes||[]).forEach(n=>S.pages.push({id:n.id,t:n.t,ic:'📄',par:null,open:1,b:n.b}));
